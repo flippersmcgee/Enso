@@ -10,8 +10,7 @@ def words_to_char(val):
         "Yes": 'Y',
         "No": 'N'
     }
-    converted_val = conversion.get(val, val)
-    return converted_val
+    return conversion.get(val, val)
 
 
 if __name__ == "__main__":

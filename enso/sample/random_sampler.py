@@ -42,7 +42,7 @@ class RandomRationalized(Random):
     @property
     def classes(self):
         if not hasattr(self, "_classes"):
-            self._classes = set([label[1] for label in self.train_labels])
+            self._classes = {label[1] for label in self.train_labels}
         return self._classes
 
     def _choose_starting_points(self, n_points=1):
@@ -76,9 +76,7 @@ class RandomSequence(Random):
 
         stripped_labels = []
         for item in train_labels:
-            per_sample = []
-            for label in item:
-                per_sample.append(label["label"])
+            per_sample = [label["label"] for label in item]
             stripped_labels.append(per_sample)
 
         self.train_labels = stripped_labels

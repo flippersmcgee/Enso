@@ -111,9 +111,7 @@ class Experimentation(object):
         for col, val in current_settings.items():
             indexes = indexes & (results[col] == val)
         experiments = results.loc[indexes]
-        if len(experiments) < (len(METRICS) + 2) * TEST_SETUP["n_splits"]:
-            return False
-        return True
+        return len(experiments) >= (len(METRICS) + 2) * TEST_SETUP["n_splits"]
 
     def _run_sub_experiment(
         self, experiment_cls, dataset, train, test, target, current_setting, experiment_hparams=None
@@ -248,10 +246,9 @@ class Experimentation(object):
         # measure score on train set to help detect overfitting                                                                                    
         if train_score is not None:
             full_setting[train_key] = train_score
-            
+
         full_setting.update(internal_setting)
-        full_setting_df = pd.DataFrame.from_records([full_setting])
-        return full_setting_df
+        return pd.DataFrame.from_records([full_setting])
             
     def _measure_experiment(
         self,

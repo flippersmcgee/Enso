@@ -67,7 +67,6 @@ class Visualization(object):
         except ValueError:
             # no problem
             df['ID'] = df['ID'].astype(str)
-            pass
         return df
 
     def visualize(self):

@@ -20,8 +20,7 @@ class KCentersAlgorithm(BaseEstimator):
         assert self.been_fit
         distances = pairwise_distances(X, self.centers_, metric=self.metric)
         closest_center_idxs = np.argmin(distances, axis=1)
-        predictions = self.classes_[closest_center_idxs]
-        return predictions
+        return self.classes_[closest_center_idxs]
 
     def score(self, X, Y, sample_weight=None):
         return accuracy_score(Y, self.predict(X))
