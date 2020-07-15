@@ -179,7 +179,7 @@ class SequenceOverSampler(Resampler):
 
             # If the randomly selected indexes are the same as last time
             # assume these are the only ones that'll fit and add as many as you can.
-            while all([n >= h for n, h in zip(need_to_add, num_to_decrement)]):
+            while all(n >= h for n, h in zip(need_to_add, num_to_decrement)):
                 extra_idxs.extend(args_to_add)
                 need_to_add = [n - h for n, h in zip(need_to_add, num_to_decrement)]
                 if last_idxs != sorted(args_to_add):

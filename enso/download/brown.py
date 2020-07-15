@@ -45,9 +45,9 @@ def brown_corpus_tags(task_name, tag_regex, whole_tag=False):
 
             doc_location = len(doc_text)
             doc_text += sub_str
-            doc_end = len(doc_text)
-
             if doc_annotations and label is not None and label == last_label:
+                doc_end = len(doc_text)
+
                 doc_annotations[-1]["end"] = doc_end
 
             elif label is not None:

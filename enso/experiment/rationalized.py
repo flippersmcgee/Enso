@@ -138,8 +138,7 @@ class ReweightedGloveClassifier(ClassificationExperiment):
             token.vector * self.p_rationale_given_word[token.text.lower()]
             for token in doc
         ], axis=0)
-        normed_doc_vect = doc_vect / np.linalg.norm(doc_vect)
-        return normed_doc_vect
+        return doc_vect / np.linalg.norm(doc_vect)
 
     def fit(self, X, Y):
         # In this naive scenario we're only trying to downweight
@@ -288,8 +287,7 @@ class DistReweightedGloveByClassClassifierCV(BaseRationaleGridSearch):
         })
 
     def _rationale_weight(self, word, rationale_proto):
-        cosine_sim = np.dot(word.vector / np.linalg.norm(word.vector), rationale_proto)
-        return cosine_sim
+        return np.dot(word.vector / np.linalg.norm(word.vector), rationale_proto)
 
     def _featurize(self, doc):
         """

@@ -27,12 +27,12 @@ def tp_fp_fn(true_char_labels, pred_char_labels, target_class):
             tp += 1
         elif target_class == pred and pred != true:
             fp += 1
-        elif target_class == true and true != pred:
+        elif target_class == true:
             fn += 1
     return tp, fp, fn
 
 def tf_fp_fn_all_classes(truth, result, none_label="none"):
-    cls = set([x["label"] for y in truth + result for x in y])
+    cls = {x["label"] for y in truth + result for x in y}
     output_metrics = {}
     for c in cls:
         if c == none_label:

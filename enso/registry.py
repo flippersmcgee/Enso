@@ -101,9 +101,8 @@ class ValidateExperiments:
             setup_dict["Experiment"] = experiment.__name__
 
             for key, value in setup_dict.items():
-                if key == "Dataset":
-                    if not self.valid_dataset(value):
-                        skips.append(exp_idx)
+                if key == "Dataset" and not self.valid_dataset(value):
+                    skips.append(exp_idx)
 
                 for field, requirement in self.reg._requirements.get(value, []):
                     field_val = setup_dict.get(field)
